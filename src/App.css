@@ -1,0 +1,72 @@
+.App {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+  
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .options {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  input {
+    font-size: 18px;
+    padding: 5px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 100px;
+  }
+
+  .user-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  
+  .users {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .name {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .company {
+    font-size: 18px;
+    color: #666;
+  }
+  
+  .created-at {
+    font-size: 18px;
+    color: #666;
+  }
+  
