@@ -1,4 +1,4 @@
-# Frontend Part of Project @Polytech Marseille (AMU)
+# Frontend Part of Project @Polytech Marseille (AMU): MD
 
 ## Available Scripts
 
