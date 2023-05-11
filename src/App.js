@@ -14,6 +14,7 @@ function App() {
     const [company, setCompany] = useState('');
 
 
+
     
     useEffect(() => {
       fetch(`http://localhost:5000/users?limit=${pageSize}&offset=${pageIndex}`)
@@ -31,7 +32,7 @@ function App() {
       setPageIndex(value - 1);
     };
 
-    // adding
+    // ADDING
     const handleSubmit = event => {
       event.preventDefault(); // no reloading of page
       // creating new user with input data
@@ -63,36 +64,87 @@ function App() {
           alert('An error occurred while adding the user. Please try again later.');
         }); 
     };
+
+    // DELETE
+    const handleDelete = (userId) => {
+      fetch(`http://localhost:5000/users/${userId}`, {
+        method: 'DELETE'
+      })
+        .then(response => {
+          if (response.ok) {
+            // Filter out the deleted user from the users array
+            const updatedUsers = users.filter(user => user.id !== userId);
+            setUsers(updatedUsers);
+          } else {
+            throw new Error('Failed to delete user');
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          alert('An error occurred while deleting the user. Please try again later.');
+        });
+    };
+
+
+    // MODIFY
+    const handleModify = (user) => {
+      setFirstName(user.first);
+      setLastName(user.last);
+      setEmail(user.email);
+      setCountry(user.country);
+      setCompany(user.company);
+      handleDelete(user.id);
+      // fetch(`http://localhost:5000/users/${user.id}`, {
+      //   method: 'PUT'
+      // })
+      //   .then(response => {
+      //     if (response.ok) {
+      //       // Filter out the deleted user from the users array
+      //       const updatedUsers = users.filter(user);
+      //       setUsers(updatedUsers);
+      //     } else {
+      //       throw new Error('Failed to delete user');
+      //     }
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //     alert('An error occurred while deleting the user. Please try again later.');
+      //   });
+    };
     
 
   
     return (
       <div className="container">
-        <h2>Add User</h2>
-  <form onSubmit={handleSubmit}>
-    <div>
-      <label>First Name:</label>
-      <input type="text" value={firstName} onChange={e => setFirstName(e.target.value)} />
-    </div>
-    <div>
-      <label>Last Name:</label>
-      <input type="text" value={lastName} onChange={e => setLastName(e.target.value)} />
-    </div>
-    <div>
-      <label>Email:</label>
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-    </div>
-    <div>
-      <label>Country:</label>
-      <input type="text" value={country} onChange={e => setCountry(e.target.value)} />
-    </div>
-    <div>
-      <label>Company:</label>
-      <input type="text" value={company} onChange={e => setCompany(e.target.value)} />
-    </div>
-    <button type="submit">Add User</button>
-  </form>
-        <h1 className="title">User List</h1>
+        <h1>MDL APP - Tilmann Rothe Santos</h1>
+        <h2>Add/Modify User</h2>
+        <div className="forms">
+              <form onSubmit={handleSubmit}>
+              <div>
+                <label>First Name:</label>
+                <input type="text" value={firstName} onChange={e => setFirstName(e.target.value)} />
+              </div>
+              <div>
+                <label>Last Name:</label>
+                <input type="text" value={lastName} onChange={e => setLastName(e.target.value)} />
+              </div>
+              <div>
+                <label>Email:</label>
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+              </div>
+              <div>
+                <label>Country:</label>
+                <input type="text" value={country} onChange={e => setCountry(e.target.value)} />
+              </div>
+              <div>
+                <label>Company:</label>
+                <input type="text" value={company} onChange={e => setCompany(e.target.value)} />
+              </div>
+              <button type="submit">UPDATE</button>
+            </form>
+        </div>
+ 
+        <h2 className="title">User List</h2>
         <div className="controls">
           <label htmlFor="page-size">Show:</label>
           <select id="page-size" value={pageSize} onChange={handlePageSizeChange}>
@@ -104,7 +156,7 @@ function App() {
             <option value="10000">10000 (slow)</option>
           </select>
         </div>
-        <ul className="user-list">
+        <u1 className="user-list">
           {users.map(user => (
             <li key={user.id}>
               <div className="user">
@@ -115,10 +167,12 @@ function App() {
                   <div className="user-company">{user.company}</div>
                 </div>
                 <div className="created">{new Date(user.created_at).toLocaleDateString()}</div>
+                <button onClick={() => handleDelete(user.id)}>Delete</button>
+                <button onClick={() => handleModify(user)}>Modify</button>
               </div>
             </li>
           ))}
-        </ul>
+        </u1>
         <div className="pagination">
           <Pagination
             count={Math.ceil(users.length / pageSize)}

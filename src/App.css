@@ -8,7 +8,8 @@
     font-size: 36px;
     margin-bottom: 20px;
   }
-  
+
+
   .options {
     display: flex;
     align-items: center;
@@ -68,5 +69,11 @@
   .created-at {
     font-size: 18px;
     color: #666;
+  }
+
+  button {
+    top: 50%;
+    background-color: aqua;
+    border-radius: 20px;
   }
   
