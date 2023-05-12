@@ -1,4 +1,4 @@
-# Frontend Part of Project @Polytech Marseille (AMU): MD
+# Frontend Part of Project Méthodes de Développement Logiciel (MDL)
 
 ## Available Scripts
 
